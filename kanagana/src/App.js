@@ -18,6 +18,10 @@ function App() {
         <Title order={1}>ひらがな</Title>
         <Title order={1}>と</Title>
         <Title order={1}>カタカナ</Title>
+        <Group position="center" style={{ marginTop: '5vh', gap: '20px' }}>
+          <Button variant="filled">Sign up</Button>
+          <Button variant="filled">Log in</Button>
+        </Group>
       </Container>
     </MantineProvider>
   );
