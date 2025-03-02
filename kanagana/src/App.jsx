@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Hiragana from './components/Hiragana.jsx'
+import Katakana from './components/Katakana.jsx'
 
 function App() {
 
@@ -24,6 +25,10 @@ function App() {
 
         {!showText && (selectedAlphabet == "hiragana") && (
           <Hiragana/>
+        )}
+
+        {!showText && (selectedAlphabet == "katakana") && (
+          <Katakana/>
         )}
       </div>
     </>
