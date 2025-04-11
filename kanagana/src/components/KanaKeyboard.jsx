@@ -24,18 +24,19 @@ function KanaKeyboard() {
         let processing = input;
         let finalInput = "";
         let processingSubstring = "";
+        let finalValidIndex = 0;
 
         for (let i = 0; i < processing.length; i++) {
             processingSubstring += processing[i];
          
             if (processingSubstring in kana) {
                 finalInput += kana[processingSubstring];
-                // processing = processing.replace(processingSubstring, "");
+                finalValidIndex += processingSubstring.length;
                 processingSubstring = "";
             }
         }
 
-        // finalInput += processing;
+        finalInput += processing.substring(finalValidIndex, processing.length);
 
         setUpdatedInput(finalInput);
     }
