@@ -14,24 +14,7 @@ import { useState, useEffect } from "react";
 function KanaKeyboard() {
     const [updatedInput, setUpdatedInput] = useState("");
     const [input, setInput] = useState(" ");
-
-    let kana = {
-        "a": "あ",
-        "i": "い",
-        "u": "う",
-        "e": "え",
-        "o": "お",
-        "ka": "か",
-        "ki": "き",
-        "ku": "く",
-        "ke": "け",
-        "ko": "こ",
-        "sa": "さ",
-        "shi": "し",
-        "su": "す",
-        "se": "せ",
-        "so": "そ",
-    }
+    const [kana, setKana] = useState({});
 
     function inputChange(e) {
         setInput(e.target.value);
@@ -47,16 +30,31 @@ function KanaKeyboard() {
          
             if (processingSubstring in kana) {
                 finalInput += kana[processingSubstring];
-                processing = processing.replace(processingSubstring, "");
+                // processing = processing.replace(processingSubstring, "");
                 processingSubstring = "";
             }
         }
 
-        finalInput += processing;
+        // finalInput += processing;
 
         setUpdatedInput(finalInput);
     }
     
+    useEffect(() => {
+        const fetchKana = async () => {
+            try {
+              const response = await fetch('/kana.json');
+              const data = await response.json();
+              console.log(data);
+              setKana(data);
+            } catch (error) {
+              console.error('Error loading kana:', error);
+            }
+          };
+        
+          fetchKana();
+    }, []);
+
     useEffect(() => {
         processInput();
     }, [input]);
