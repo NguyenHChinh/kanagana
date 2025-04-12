@@ -23,25 +23,6 @@ function App() {
         <Route path="/practice/:kanaType" element={<Practice/>}/>
       </Routes>
     </Router>
-
-    // <>
-    //   <div className="main-container">
-    //     {showText && (
-    //       <>
-    //         <h1 onClick={() => handleClick("hiragana")}>ひらがな</h1>
-    //         <h1 onClick={() => handleClick("katakana")}>カタカナ</h1>
-    //       </>
-    //     )}
-
-    //     {!showText && (selectedAlphabet == "hiragana") && (
-    //       <Hiragana/>
-    //     )}
-
-    //     {!showText && (selectedAlphabet == "katakana") && (
-    //       <Katakana/>
-    //     )}
-    //   </div>
-    // </>
   )
 }
 
