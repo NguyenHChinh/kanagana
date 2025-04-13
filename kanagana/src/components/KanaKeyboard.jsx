@@ -10,11 +10,13 @@
 // katakana tool, since showing the hiragana would make sense.
 
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function KanaKeyboard() {
     const [updatedInput, setUpdatedInput] = useState("");
     const [input, setInput] = useState(" ");
     const [kana, setKana] = useState({});
+    const { kanaType } = useParams();
 
     function inputChange(e) {
         setInput(e.target.value);
@@ -44,16 +46,16 @@ function KanaKeyboard() {
     useEffect(() => {
         const fetchKana = async () => {
             try {
-              const response = await fetch('/kana.json');
-              const data = await response.json();
-              console.log(data);
-              setKana(data);
+                const response = await fetch('/kana.json');
+                const data = await response.json();
+                console.log(data);
+                setKana(data);
             } catch (error) {
-              console.error('Error loading kana:', error);
+                console.error('Error loading kana:', error);
             }
-          };
+        };
         
-          fetchKana();
+        fetchKana();
     }, []);
 
     useEffect(() => {
