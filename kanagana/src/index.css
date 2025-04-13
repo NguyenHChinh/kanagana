@@ -30,3 +30,8 @@ body{
     height: 100vh;
     flex-direction: column;
 }
+
+.word-container{
+    display: flex;
+    flex-direction: row;
+}
