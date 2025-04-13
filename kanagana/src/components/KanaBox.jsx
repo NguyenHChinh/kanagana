@@ -5,9 +5,9 @@ import props from "prop-types";
 function KanaBox(props) {
 
     return(
-        <>
+        <div className="kana-box">
             <h1> [ { props.char } ]</h1>
-        </>
+        </div>
     )
 }
 

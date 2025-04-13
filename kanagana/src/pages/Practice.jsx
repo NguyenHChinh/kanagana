@@ -14,7 +14,7 @@ function Practice() {
 
             <WordSelector/>
 
-            {kanaType === "katakana" && <KanaKeyboard />}
+            {/* {kanaType === "katakana" && <KanaKeyboard />} */}
         </>
     )
 }

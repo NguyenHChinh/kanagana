@@ -35,3 +35,9 @@ body{
     display: flex;
     flex-direction: row;
 }
+
+.kana-box{
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}

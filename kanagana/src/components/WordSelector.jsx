@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import KanaBox from "./KanaBox";
+import KanaKeyboard from "./KanaKeyboard";
 
 function WordSelector() {
 
     const [words, setWords] = useState([]);
     const [randomWord, setRandomWord] = useState();
     const [brokenUpWord, setBrokenUpWord] = useState([]);
+    const [answer, setAnswer] = useState([]);
 
     const { kanaType } = useParams();
 
@@ -38,6 +40,12 @@ function WordSelector() {
         }
     }, [randomWord]);
 
+    useEffect(() => {
+        for (let i = 0; i < brokenUpWord.length; i++) {
+            setAnswer((prev) => [...prev, " "]);
+        }
+    }, [brokenUpWord]);
+
     const getRandomWord = () => {
         if (words.length > 0) {
             const randomIndex = Math.floor(Math.random() * words.length);
@@ -56,6 +64,15 @@ function WordSelector() {
                     )
                 }
             </div>
+
+            <div className="word-container">
+                {answer.map((char, index) =>
+                        <KanaBox char={char} key={index}/>
+                    )
+                }
+            </div>
+
+            <KanaKeyboard/>
         </>
     )
 }
