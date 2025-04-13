@@ -12,7 +12,7 @@ function Practice() {
             <Back/>
             <h1>{ kanaType.toUpperCase() }</h1>
 
-            <WordSelector kanaType={kanaType}/>
+            <WordSelector/>
 
             {kanaType === "katakana" && <KanaKeyboard />}
         </>
