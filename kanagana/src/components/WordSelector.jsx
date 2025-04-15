@@ -54,6 +54,19 @@ function WordSelector() {
         return null;
     };
 
+    const handleInputChange = (e) => {
+        if (e.length > brokenUpWord.length) {
+            setAnswer(e.substring(0, brokenUpWord.length).split(""));
+        }
+        else {
+            let temp = e.split("");
+            while (temp.length < brokenUpWord.length) {
+                temp.push(" ");
+            }
+            setAnswer(temp);
+        }
+    }
+
     return(
         <>
             <h1>Random Word:</h1>
@@ -72,7 +85,11 @@ function WordSelector() {
                 }
             </div>
 
+            <h1>Test Input:</h1>
+            <input type="text" onChange={(e) => handleInputChange(e.target.value)}></input>
+
             <KanaKeyboard/>
+
         </>
     )
 }
