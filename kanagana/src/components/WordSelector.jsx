@@ -42,8 +42,8 @@ function WordSelector() {
     }, [randomWord]);
 
     useEffect(() => {
-        for (let i = 0; i < brokenUpWord.length; i++) {
-            setAnswer((prev) => [...prev, " "]);
+        if (brokenUpWord.length > 0) {
+            setAnswer(Array(brokenUpWord.length).fill(" "));
         }
     }, [brokenUpWord]);
 
@@ -56,9 +56,7 @@ function WordSelector() {
     };
 
     useEffect(() => {
-        if (kanaInput.length > 0) {
-            handleInputChange(kanaInput);
-        }
+        handleInputChange(kanaInput);
     }, [kanaInput]);
 
     const handleInputChange = (e) => {
