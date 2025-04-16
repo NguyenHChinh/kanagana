@@ -9,6 +9,7 @@ function WordSelector() {
     const [randomWord, setRandomWord] = useState();
     const [brokenUpWord, setBrokenUpWord] = useState([]);
     const [answer, setAnswer] = useState([]);
+    const [kanaInput, setKanaInput] = useState("");
 
     const { kanaType } = useParams();
 
@@ -54,6 +55,12 @@ function WordSelector() {
         return null;
     };
 
+    useEffect(() => {
+        if (kanaInput.length > 0) {
+            handleInputChange(kanaInput);
+        }
+    }, [kanaInput]);
+
     const handleInputChange = (e) => {
         if (e.length > brokenUpWord.length) {
             setAnswer(e.substring(0, brokenUpWord.length).split(""));
@@ -88,7 +95,7 @@ function WordSelector() {
             <h1>Test Input:</h1>
             <input type="text" onChange={(e) => handleInputChange(e.target.value)}></input>
 
-            <KanaKeyboard/>
+            <KanaKeyboard sendData={setKanaInput}/>
 
         </>
     )

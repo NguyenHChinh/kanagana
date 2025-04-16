@@ -12,7 +12,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function KanaKeyboard() {
+function KanaKeyboard({ sendData }) {
     const [updatedInput, setUpdatedInput] = useState("");
     const [input, setInput] = useState(" ");
     const [kana, setKana] = useState({});
@@ -38,8 +38,9 @@ function KanaKeyboard() {
             }
         }
 
+        sendData(finalInput);
+        
         finalInput += processing.substring(finalValidIndex, processing.length);
-
         setUpdatedInput(finalInput);
     }
     
