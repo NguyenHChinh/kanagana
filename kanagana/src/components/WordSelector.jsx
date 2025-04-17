@@ -62,6 +62,15 @@ function WordSelector() {
         handleInputChange(kanaInput);
     }, [kanaInput]);
 
+    useEffect(() => {
+        const areEqual = answer.length === expectedAnswer.length &&
+        answer.every((char, i) => char === expectedAnswer[i]);
+
+        if (areEqual) {
+            console.log("DING DING DING");
+        }
+    }, [answer, expectedAnswer]);
+
     const handleInputChange = (e) => {
         if (e.length > brokenUpWord.length) {
             setAnswer(e.substring(0, brokenUpWord.length).split(""));
