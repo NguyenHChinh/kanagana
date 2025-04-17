@@ -49,7 +49,7 @@ function KanaKeyboard({ sendData }) {
             try {
                 const response = await fetch('/kana.json');
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
                 setKana(data);
             } catch (error) {
                 console.error('Error loading kana:', error);

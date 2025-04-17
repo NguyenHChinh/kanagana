@@ -20,7 +20,7 @@ function WordSelector() {
             try {
                 const response = await fetch('/katakanaWords.json');
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
                 setWords(data);
             } catch (error) {
                 console.error('Error loading katakana words:', error);
@@ -32,6 +32,11 @@ function WordSelector() {
 
     useEffect(() => {
         let temp = getRandomWord();
+
+        if (!temp) {
+            return;
+        }
+        
         console.log(temp);
         setRandomWord(temp);
     }, [words]);
@@ -63,8 +68,12 @@ function WordSelector() {
     }, [kanaInput]);
 
     useEffect(() => {
-        const areEqual = answer.length === expectedAnswer.length &&
+        let areEqual = answer.length === expectedAnswer.length &&
         answer.every((char, i) => char === expectedAnswer[i]);
+
+        if (expectedAnswer.length == 0) {
+            areEqual = false;
+        }
 
         if (areEqual) {
             console.log("DING DING DING");
