@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import KanaBox from "./KanaBox";
 import KanaKeyboard from "./KanaKeyboard";
+import katakanaToHiragana from '../data/katakanaToHiragana.json'
 
 function WordSelector() {
 
@@ -10,6 +11,7 @@ function WordSelector() {
     const [brokenUpWord, setBrokenUpWord] = useState([]);
     const [answer, setAnswer] = useState([]);
     const [kanaInput, setKanaInput] = useState("");
+    const [expectedAnswer, setExpectedAnswer] = useState([]);
 
     const { kanaType } = useParams();
 
@@ -37,7 +39,8 @@ function WordSelector() {
     useEffect(() => {
         if (randomWord) {
             setBrokenUpWord(randomWord.split(""));
-            console.log(brokenUpWord);
+            setExpectedAnswer(convertKana(randomWord).split(""))
+            // console.log(brokenUpWord);
         }
     }, [randomWord]);
 
@@ -72,12 +75,23 @@ function WordSelector() {
         }
     }
 
+    function convertKana(str) {
+        return str.split('').map(char => katakanaToHiragana[char] || char).join('');
+    }
+
     return(
         <>
             <h1>Random Word:</h1>
 
             <div className="word-container">
                 {brokenUpWord.map((char, index) =>
+                        <KanaBox char={char} key={index}/>
+                    )
+                }
+            </div>
+
+            <div className="word-container">
+                {expectedAnswer.map((char, index) =>
                         <KanaBox char={char} key={index}/>
                     )
                 }
