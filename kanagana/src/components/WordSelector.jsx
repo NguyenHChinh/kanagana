@@ -5,6 +5,9 @@ import KanaKeyboard from "./KanaKeyboard";
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
 
 function WordSelector() {
+    // TOOD: Add global event listener
+    //       One to focus KanaKeyboard text input
+    //       If already focused, run check functio
 
     const [words, setWords] = useState([]);
     const [randomWord, setRandomWord] = useState();
@@ -36,7 +39,7 @@ function WordSelector() {
         if (!temp) {
             return;
         }
-        
+
         console.log(temp);
         setRandomWord(temp);
     }, [words]);

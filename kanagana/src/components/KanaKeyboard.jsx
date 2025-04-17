@@ -23,6 +23,10 @@ function KanaKeyboard({ sendData }) {
     }
     
     function processInput() {
+        // TODO: Change way kana is typed so that backspace is more clear
+        //       For example, typing "ra" and backspacing once only deletes the a, but
+        //       I want the user to be able to delete the ”ら” that would appear.
+
         let processing = input;
         let finalInput = "";
         let processingSubstring = "";
