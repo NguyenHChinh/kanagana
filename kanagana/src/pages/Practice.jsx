@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Back from "../components/Back";
 import KanaKeyboard from "../components/KanaKeyboard";
 import WordSelector from "../components/WordSelector";
+import Hiragana from '../components/Hiragana.jsx';
+import Katakana from '../components/Katakana.jsx';
 
 function Practice() {
     const { kanaType } = useParams();
+    console.log(kanaType);
 
     return(
         <>
-            <Back/>
-            <h1>{ kanaType.toUpperCase() }</h1>
-
-            <WordSelector/>
-
-            {/* {kanaType === "katakana" && <KanaKeyboard />} */}
+            {kanaType === "hiragana" && <Hiragana />}
+            {kanaType === "katakana" && <Katakana />}
         </>
     )
 }
