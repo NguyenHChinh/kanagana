@@ -55,19 +55,24 @@ function KanaKeyboard({ sendData }) {
             }
 
             if (matchedKana) {
-                setCharacters(prev => [...prev, matchedKana]);
+                let newCharacters = []
+                if (characters) {
+                    newCharacters = characters;
+                }
+                newCharacters.push(matchedKana);
+                setCharacters(newCharacters);
                 setRomajiBuffer(updatedBuffer.slice(matchLength));
-                console.log(`New Kana Sheet: ${characters}`);
+            
+                const output = newCharacters.join("") + updatedBuffer.slice(matchLength);
+                setUpdatedInput(output);
             } else {
                 setRomajiBuffer(updatedBuffer);
-            }
-
-            if (updatedBuffer) {
-                let output = "";
+                let newCharacters = []
                 if (characters) {
-                    output = characters.join("");
+                    newCharacters = characters;
                 }
-                output += updatedBuffer;
+                newCharacters.push(matchedKana);
+                const output = newCharacters.join("") + updatedBuffer.slice(matchLength);
                 setUpdatedInput(output);
             }
         }
