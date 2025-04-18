@@ -102,8 +102,6 @@ function WordSelector() {
 
     return(
         <>
-            <h1>Random Word:</h1>
-
             <div className="word-container">
                 {brokenUpWord.map((char, index) =>
                         <KanaBox char={char} key={index}/>
