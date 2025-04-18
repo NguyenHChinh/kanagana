@@ -6,7 +6,7 @@ function KanaBox(props) {
 
     return(
         <div className="kana-box">
-            <h1> [ { props.char } ]</h1>
+            <h1>{ props.char }</h1>
         </div>
     )
 }
