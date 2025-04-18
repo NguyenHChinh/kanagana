@@ -1,9 +1,10 @@
+import WordSelector from './WordSelector.jsx';
 
 function Katakana() {
     
     return(
         <>
-            <h1>Hi, Katakana!</h1>
+            <WordSelector/>
         </>
     )
 }
