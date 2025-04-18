@@ -125,9 +125,6 @@ function WordSelector() {
                 }
             </div>
 
-            <h1>Test Input:</h1>
-            <input type="text" onChange={(e) => handleInputChange(e.target.value)}></input>
-
             <KanaKeyboard sendData={setKanaInput}/>
 
         </>

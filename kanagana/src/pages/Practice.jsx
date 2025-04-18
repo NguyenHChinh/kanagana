@@ -7,7 +7,7 @@ import Katakana from '../components/Katakana.jsx';
 
 function Practice() {
     const { kanaType } = useParams();
-    console.log(kanaType);
+    console.log(`Just loaded ${kanaType}`);
 
     return(
         <>
