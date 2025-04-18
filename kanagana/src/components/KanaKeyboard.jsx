@@ -10,12 +10,68 @@
 // katakana tool, since showing the hiragana would make sense.
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import "./KanaKeyboard.css";
 
 function KanaKeyboard({ sendData }) {
     const [updatedInput, setUpdatedInput] = useState("");
     const [input, setInput] = useState(" ");
+    const [characters, setCharacters] = useState("");
+    const [segments, setSegments] = useState([]);
+    const [romajiBuffer, setRomajiBuffer] = useState("");
     const [kana, setKana] = useState({});
+
+    useEffect(() => {
+        const fetchKana = async () => {
+            try {
+                const response = await fetch('/kana.json');
+                const data = await response.json();
+                // console.log(data);
+                setKana(data);
+            } catch (error) {
+                console.error('Error loading kana:', error);
+            }
+        };
+        
+        fetchKana();
+    }, []);
+
+    function handleKeyDown(e) {
+        if (e.key === "Backspace") {
+            console.log("backspace weee");
+        }
+
+        if (e.key.length === 1 && e.key.match(/[a-zA-Z]/)) {
+            const updatedBuffer = romajiBuffer + e.key.toLowerCase();
+
+            let matchedKana = null;
+            let matchLength = 0;
+
+            for (let i = 1; i <= updatedBuffer.length; i++) {
+                const substr = updatedBuffer.slice(0, i);
+                if (kana[substr]) {
+                    matchedKana = kana[substr];
+                    matchLength = i;
+                }
+            }
+
+            if (matchedKana) {
+                setCharacters(prev => [...prev, matchedKana]);
+                setRomajiBuffer(updatedBuffer.slice(matchLength));
+                console.log(`New Kana Sheet: ${characters}`);
+            } else {
+                setRomajiBuffer(updatedBuffer);
+            }
+
+            if (updatedBuffer) {
+                let output = "";
+                if (characters) {
+                    output = characters.join("");
+                }
+                output += updatedBuffer;
+                setUpdatedInput(output);
+            }
+        }
+    }
 
     function inputChange(e) {
         setInput(e.target.value);
@@ -49,30 +105,17 @@ function KanaKeyboard({ sendData }) {
         finalInput += processing.substring(finalValidIndex, processing.length);
         setUpdatedInput(finalInput);
     }
-    
-    useEffect(() => {
-        const fetchKana = async () => {
-            try {
-                const response = await fetch('/kana.json');
-                const data = await response.json();
-                // console.log(data);
-                setKana(data);
-            } catch (error) {
-                console.error('Error loading kana:', error);
-            }
-        };
-        
-        fetchKana();
-    }, []);
 
     useEffect(() => {
         processInput();
     }, [input]);
 
     return(
-        <div className="kana-keyboard-container">
-            <h1>Input: { updatedInput }</h1>
-            <input type="text" onChange={(e) => inputChange(e)}></input>
+        <div className="kana-keyboard-container"
+            tabIndex={0}
+            onKeyDown={handleKeyDown}>
+            <h1>{ updatedInput }</h1>
+            {/* <input type="text" onChange={(e) => inputChange(e)}></input> */}
         </div>
     )
 }
