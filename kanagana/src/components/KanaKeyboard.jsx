@@ -16,7 +16,6 @@ function KanaKeyboard({ sendData }) {
     const [updatedInput, setUpdatedInput] = useState("");
     const [input, setInput] = useState(" ");
     const [kana, setKana] = useState({});
-    const { kanaType } = useParams();
 
     function inputChange(e) {
         setInput(e.target.value);
@@ -26,6 +25,9 @@ function KanaKeyboard({ sendData }) {
         // TODO: Change way kana is typed so that backspace is more clear
         //       For example, typing "ra" and backspacing once only deletes the a, but
         //       I want the user to be able to delete the ”ら” that would appear.
+
+        // I think I can do this by updating the text input value, but
+        // I need to be able to skip the current value if letter is kana
 
         let processing = input;
         let finalInput = "";
