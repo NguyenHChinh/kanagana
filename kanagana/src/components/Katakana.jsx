@@ -10,55 +10,61 @@ const getRandomWord = () => {
     return katakanaWords[Math.floor(Math.random() * katakanaWords.length)];
 };
 
+function convertKana(str) {
+    return str.split('').map(char => katakanaToHiragana[char] || char).join('');
+}
+
 function Katakana() {
     // TODO: Work on answer checking, if correct, should generate
     //       a new word, if wrong, then should somehow notify user
     //       (can breakstorm on this one at a future time)
 
+    // CURRENT RANDOM WORD + ARRAY FORM
     const [currentWord, setCurrentWord] = useState(getRandomWord());
-    const [brokenUpWord, setBrokenUpWord] = useState([]);
-    const [answer, setAnswer] = useState([]);
-    const [kanaInput, setKanaInput] = useState("");
-    const [expectedAnswer, setExpectedAnswer] = useState([]);
-    const [trigger, setTrigger] = useState(0);
+    const [currentWordArray, setCurrentWordArray] = useState([]);
 
-    function convertKana(str) {
-        return str.split('').map(char => katakanaToHiragana[char] || char).join('');
-    }
+    // CURRENT RANDOM WORD IN HIRAGANA
+    const [currentWordHiragana, setCurrentWordHiragana] = useState([]);
+    
+    // USER INPUT + ARRAY FORM
+    const [kanaInput, setKanaInput] = useState("");
+    const [kanaInputArray, setKanaInputArray] = useState([]);
+
+    // STATE USED TO TRIGGER COMPONENTS
+    const [trigger, setTrigger] = useState(0);
 
     useEffect(() => {
         if (currentWord) {
-            setBrokenUpWord(currentWord.split(""));
-            setExpectedAnswer(convertKana(currentWord).split(""))
+            setCurrentWordArray(currentWord.split(""));
+            setCurrentWordHiragana(convertKana(currentWord).split(""))
         }
     }, [currentWord]);
 
     useEffect(() => {
-        if (brokenUpWord.length > 0) {
-            setAnswer(Array(brokenUpWord.length).fill(" "));
+        if (currentWordArray.length > 0) {
+            setKanaInputArray(Array(currentWordArray.length).fill(" "));
         }
-    }, [brokenUpWord]);
+    }, [currentWordArray]);
 
     // Adjusting the array such that allows for .map function
     useEffect(() => {
-        if (kanaInput.length > brokenUpWord.length) {
-            setAnswer(kanaInput.substring(0, brokenUpWord.length).split(""));
+        if (kanaInput.length > currentWordArray.length) {
+            setKanaInputArray(kanaInput.substring(0, currentWordArray.length).split(""));
         }
         else {
             let temp = kanaInput.split("");
-            while (temp.length < brokenUpWord.length) {
+            while (temp.length < currentWordArray.length) {
                 temp.push(" ");
             }
-            setAnswer(temp);
+            setKanaInputArray(temp);
         }
     }, [kanaInput]);
 
-
     function handleSubmit() {
-        let areEqual = answer.length === expectedAnswer.length &&
-        answer.every((char, i) => char === expectedAnswer[i]);
+        let areEqual = kanaInputArray.length === currentWordHiragana.length &&
+        kanaInputArray.every((char, i) => char === currentWordHiragana[i]);
 
-        if (expectedAnswer.length == 0) {
+        if (currentWordHiragana.length == 0) {
             areEqual = false;
         }
 
@@ -78,14 +84,14 @@ function Katakana() {
         <>
             <div className="question-container">
                 <div className="word-container">
-                    {brokenUpWord.map((char, index) =>
+                    {currentWordArray.map((char, index) =>
                             <KanaBox char={char} key={index}/>
                         )
                     }
                 </div>
 
                 <div className="word-container">
-                    {answer.map((char, index) =>
+                    {kanaInputArray.map((char, index) =>
                             <KanaBox char={char} key={index}/>
                         )
                     }
@@ -98,7 +104,7 @@ function Katakana() {
             <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <h1 className="answer"> This is the answer (DEV-ONLY)</h1>
             <div className="word-container">
-                {expectedAnswer.map((char, index) =>
+                {currentWordHiragana.map((char, index) =>
                         <KanaBox char={char} key={index}/>
                     )
                 }
