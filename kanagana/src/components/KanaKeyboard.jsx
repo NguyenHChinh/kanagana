@@ -57,7 +57,7 @@ function KanaKeyboard({ sendData }) {
             }
         }
 
-        if (e.key.length === 1 && e.key.match(/[a-zA-Z]/)) {
+        if (e.key.length === 1 && e.key.match(/[a-zA-Z\-]/)) {
             const updatedBuffer = romajiBuffer + e.key.toLowerCase();
 
             let matchedKana = null;
@@ -103,6 +103,7 @@ function KanaKeyboard({ sendData }) {
         let output = ""
         if (characters) {
             output += characters.join("");
+            sendData(characters.join(""));
         }
         if (romajiBuffer) {
             output += romajiBuffer;
