@@ -37,7 +37,24 @@ function KanaKeyboard({ sendData }) {
 
     function handleKeyDown(e) {
         if (e.key === "Backspace") {
-            console.log("backspace weee");
+            // Last character is unfinished kana
+            if (romajiBuffer) {
+                let output = romajiBuffer;
+                output = output.substring(0, output.length - 1);
+                setRomajiBuffer(output);
+                // console.log(output);
+            }
+            // Last character is finished kana
+            else if (characters) {
+                let output = [...characters];
+                output.pop();
+                setCharacters(output);
+                // console.log(output);
+            }
+            // Empty, nothing to do
+            else {
+                console.log("NOTHING TO ERASE");
+            }
         }
 
         if (e.key.length === 1 && e.key.match(/[a-zA-Z]/)) {
@@ -57,7 +74,7 @@ function KanaKeyboard({ sendData }) {
             if (matchedKana) {
                 let newCharacters = []
                 if (characters) {
-                    newCharacters = characters;
+                    newCharacters = [...characters];
                 }
                 newCharacters.push(matchedKana);
                 setCharacters(newCharacters);
@@ -69,7 +86,7 @@ function KanaKeyboard({ sendData }) {
                 setRomajiBuffer(updatedBuffer);
                 let newCharacters = []
                 if (characters) {
-                    newCharacters = characters;
+                    newCharacters = [...characters];
                 }
                 newCharacters.push(matchedKana);
                 const output = newCharacters.join("") + updatedBuffer.slice(matchLength);
@@ -81,6 +98,17 @@ function KanaKeyboard({ sendData }) {
     function inputChange(e) {
         setInput(e.target.value);
     }
+
+    useEffect(() => {
+        let output = ""
+        if (characters) {
+            output += characters.join("");
+        }
+        if (romajiBuffer) {
+            output += romajiBuffer;
+        }
+        setUpdatedInput(output);
+    }, [characters, romajiBuffer]);
     
     function processInput() {
         // TODO: Change way kana is typed so that backspace is more clear
