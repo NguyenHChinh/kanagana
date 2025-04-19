@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import './KanaSelect.css';
 
 function KanaSelect() {
     const navigate = useNavigate();

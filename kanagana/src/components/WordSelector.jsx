@@ -104,18 +104,20 @@ function WordSelector() {
 
     return(
         <>
-            <div className="word-container">
-                {brokenUpWord.map((char, index) =>
-                        <KanaBox char={char} key={index}/>
-                    )
-                }
-            </div>
+            <div className="question-container">
+                <div className="word-container">
+                    {brokenUpWord.map((char, index) =>
+                            <KanaBox char={char} key={index}/>
+                        )
+                    }
+                </div>
 
-            <div className="word-container">
-                {answer.map((char, index) =>
-                        <KanaBox char={char} key={index}/>
-                    )
-                }
+                <div className="word-container">
+                    {answer.map((char, index) =>
+                            <KanaBox char={char} key={index}/>
+                        )
+                    }
+                </div>
             </div>
 
 

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import props from "prop-types";
+import './Kanabox.css';
 
 function KanaBox(props) {
 

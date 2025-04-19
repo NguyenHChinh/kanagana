@@ -1,0 +1,28 @@
+.kana-select{
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 2px;
+
+    background-color: transparent;
+    border: none;
+}
+
+.kana-select:hover{
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s ease, text-shadow 0.2s ease;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.kana-select-container{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
