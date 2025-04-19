@@ -14,9 +14,7 @@ import "./KanaKeyboard.css";
 
 function KanaKeyboard({ sendData }) {
     const [updatedInput, setUpdatedInput] = useState("");
-    const [input, setInput] = useState(" ");
     const [characters, setCharacters] = useState("");
-    const [segments, setSegments] = useState([]);
     const [romajiBuffer, setRomajiBuffer] = useState("");
     const [kana, setKana] = useState({});
 
@@ -95,10 +93,6 @@ function KanaKeyboard({ sendData }) {
         }
     }
 
-    function inputChange(e) {
-        setInput(e.target.value);
-    }
-
     useEffect(() => {
         let output = ""
         if (characters) {
@@ -111,39 +105,6 @@ function KanaKeyboard({ sendData }) {
         setUpdatedInput(output);
     }, [characters, romajiBuffer]);
     
-    function processInput() {
-        // TODO: Change way kana is typed so that backspace is more clear
-        //       For example, typing "ra" and backspacing once only deletes the a, but
-        //       I want the user to be able to delete the ”ら” that would appear.
-
-        // I think I can do this by updating the text input value, but
-        // I need to be able to skip the current value if letter is kana
-
-        let processing = input;
-        let finalInput = "";
-        let processingSubstring = "";
-        let finalValidIndex = 0;
-
-        for (let i = 0; i < processing.length; i++) {
-            processingSubstring += processing[i];
-         
-            if (processingSubstring in kana) {
-                finalInput += kana[processingSubstring];
-                finalValidIndex += processingSubstring.length;
-                processingSubstring = "";
-            }
-        }
-
-        sendData(finalInput);
-        
-        finalInput += processing.substring(finalValidIndex, processing.length);
-        setUpdatedInput(finalInput);
-    }
-
-    useEffect(() => {
-        processInput();
-    }, [input]);
-
     return(
         <div className="kana-keyboard-container"
             tabIndex={0}
