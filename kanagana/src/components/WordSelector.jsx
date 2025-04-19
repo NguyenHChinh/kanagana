@@ -5,15 +5,6 @@ import katakanaToHiragana from '../data/katakanaToHiragana.json'
 import './WordSelector.css';
 
 function WordSelector() {
-    // TODO: Add abstraction; move most of this code to
-    //       Katakana.jsx instead of just here
-    //       This file should be just for randomly selecting a word
-    //       and passing it back, anyway.
-
-    // TODO: Work on answer checking, if correct, should generate
-    //       a new word, if wrong, then should somehow notify user
-    //       (can breakstorm on this one at a future time)
-
     const [words, setWords] = useState([]);
     const [randomWord, setRandomWord] = useState();
     const [brokenUpWord, setBrokenUpWord] = useState([]);
