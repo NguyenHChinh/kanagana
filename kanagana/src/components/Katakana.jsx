@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import KanaBox from "./KanaBox";
-import KanaKeyboard from "./KanaKeyboard";
+import WordSelector from './WordSelector';
+import KanaBox from './KanaBox';
+import KanaKeyboard from './KanaKeyboard';
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
 import './Katakana.css';
 
@@ -9,56 +10,54 @@ function Katakana() {
     //       a new word, if wrong, then should somehow notify user
     //       (can breakstorm on this one at a future time)
 
-    const [words, setWords] = useState([]);
     const [randomWord, setRandomWord] = useState();
     const [brokenUpWord, setBrokenUpWord] = useState([]);
     const [answer, setAnswer] = useState([]);
     const [kanaInput, setKanaInput] = useState("");
     const [expectedAnswer, setExpectedAnswer] = useState([]);
 
-    const getRandomWord = () => {
-        if (words.length > 0) {
-            const randomIndex = Math.floor(Math.random() * words.length);
-            return words[randomIndex];
-        }
-        return null;
-    };
+    // const getRandomWord = () => {
+    //     if (words.length > 0) {
+    //         const randomIndex = Math.floor(Math.random() * words.length);
+    //         return words[randomIndex];
+    //     }
+    //     return null;
+    // };
 
     function convertKana(str) {
         return str.split('').map(char => katakanaToHiragana[char] || char).join('');
     }
 
-    useEffect(() => {
-        const fetchKana = async () => {
-            try {
-                const response = await fetch('/katakanaWords.json');
-                const data = await response.json();
-                // console.log(data);
-                setWords(data);
-            } catch (error) {
-                console.error('Error loading katakana words:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchKana = async () => {
+    //         try {
+    //             const response = await fetch('/katakanaWords.json');
+    //             const data = await response.json();
+    //             // console.log(data);
+    //             setWords(data);
+    //         } catch (error) {
+    //             console.error('Error loading katakana words:', error);
+    //         }
+    //     };
         
-        fetchKana();
-    }, []);
+    //     fetchKana();
+    // }, []);
 
-    useEffect(() => {
-        let temp = getRandomWord();
+    // useEffect(() => {
+    //     let temp = getRandomWord();
 
-        if (!temp) {
-            return;
-        }
+    //     if (!temp) {
+    //         return;
+    //     }
 
-        console.log(temp);
-        setRandomWord(temp);
-    }, [words]);
+    //     console.log(temp);
+    //     setRandomWord(temp);
+    // }, [words]);
 
     useEffect(() => {
         if (randomWord) {
             setBrokenUpWord(randomWord.split(""));
             setExpectedAnswer(convertKana(randomWord).split(""))
-            // console.log(brokenUpWord);
         }
     }, [randomWord]);
 
@@ -68,22 +67,20 @@ function Katakana() {
         }
     }, [brokenUpWord]);
 
+    // Adjusting the array such that allows for .map function
     useEffect(() => {
-        updateAnswerArray(kanaInput);
-    }, [kanaInput]);
-
-    const updateAnswerArray = (e) => {
-        if (e.length > brokenUpWord.length) {
-            setAnswer(e.substring(0, brokenUpWord.length).split(""));
+        if (kanaInput.length > brokenUpWord.length) {
+            setAnswer(kanaInput.substring(0, brokenUpWord.length).split(""));
         }
         else {
-            let temp = e.split("");
+            let temp = kanaInput.split("");
             while (temp.length < brokenUpWord.length) {
                 temp.push(" ");
             }
             setAnswer(temp);
         }
-    }
+    }, [kanaInput]);
+
 
     function handleSubmit() {
         let areEqual = answer.length === expectedAnswer.length &&
@@ -104,6 +101,7 @@ function Katakana() {
 
     return(
         <>
+            <WordSelector onWordSelect={setRandomWord}/>
             <div className="question-container">
                 <div className="word-container">
                     {brokenUpWord.map((char, index) =>
