@@ -12,11 +12,17 @@
 import { useState, useEffect } from "react";
 import "./KanaKeyboard.css";
 
-function KanaKeyboard({ sendData, onEnter }) {
-    const [updatedInput, setUpdatedInput] = useState("");
-    const [characters, setCharacters] = useState("");
-    const [romajiBuffer, setRomajiBuffer] = useState("");
+function KanaKeyboard({ sendData, onEnter, resetSignal }) {
     const [kana, setKana] = useState({});
+    const [characters, setCharacters] = useState([]);
+    const [romajiBuffer, setRomajiBuffer] = useState("");
+    const [updatedInput, setUpdatedInput] = useState("");
+
+    useEffect(() => {
+        setCharacters([]);
+        setRomajiBuffer("");
+        sendData("");
+    }, [resetSignal]);
 
     useEffect(() => {
         const fetchKana = async () => {

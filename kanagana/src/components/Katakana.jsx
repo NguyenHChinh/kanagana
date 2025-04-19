@@ -1,65 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import WordSelector from './WordSelector';
 import KanaBox from './KanaBox';
 import KanaKeyboard from './KanaKeyboard';
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
+import katakanaWords from '../data/katakanaWords.json';
 import './Katakana.css';
+
+const getRandomWord = () => {
+    return katakanaWords[Math.floor(Math.random() * katakanaWords.length)];
+};
 
 function Katakana() {
     // TODO: Work on answer checking, if correct, should generate
     //       a new word, if wrong, then should somehow notify user
     //       (can breakstorm on this one at a future time)
 
-    const [randomWord, setRandomWord] = useState();
+    const [currentWord, setCurrentWord] = useState(getRandomWord());
     const [brokenUpWord, setBrokenUpWord] = useState([]);
     const [answer, setAnswer] = useState([]);
     const [kanaInput, setKanaInput] = useState("");
     const [expectedAnswer, setExpectedAnswer] = useState([]);
-
-    // const getRandomWord = () => {
-    //     if (words.length > 0) {
-    //         const randomIndex = Math.floor(Math.random() * words.length);
-    //         return words[randomIndex];
-    //     }
-    //     return null;
-    // };
+    const [trigger, setTrigger] = useState(0);
 
     function convertKana(str) {
         return str.split('').map(char => katakanaToHiragana[char] || char).join('');
     }
 
-    // useEffect(() => {
-    //     const fetchKana = async () => {
-    //         try {
-    //             const response = await fetch('/katakanaWords.json');
-    //             const data = await response.json();
-    //             // console.log(data);
-    //             setWords(data);
-    //         } catch (error) {
-    //             console.error('Error loading katakana words:', error);
-    //         }
-    //     };
-        
-    //     fetchKana();
-    // }, []);
-
-    // useEffect(() => {
-    //     let temp = getRandomWord();
-
-    //     if (!temp) {
-    //         return;
-    //     }
-
-    //     console.log(temp);
-    //     setRandomWord(temp);
-    // }, [words]);
-
     useEffect(() => {
-        if (randomWord) {
-            setBrokenUpWord(randomWord.split(""));
-            setExpectedAnswer(convertKana(randomWord).split(""))
+        if (currentWord) {
+            setBrokenUpWord(currentWord.split(""));
+            setExpectedAnswer(convertKana(currentWord).split(""))
         }
-    }, [randomWord]);
+    }, [currentWord]);
 
     useEffect(() => {
         if (brokenUpWord.length > 0) {
@@ -92,6 +64,9 @@ function Katakana() {
 
         if (areEqual) {
             console.log("Correct answer!");
+            const newWord = getRandomWord();
+            setCurrentWord(newWord);
+            setTrigger(c => c + 1);
         }
         else {
             console.log("Wrong answer!");
@@ -101,7 +76,6 @@ function Katakana() {
 
     return(
         <>
-            <WordSelector onWordSelect={setRandomWord}/>
             <div className="question-container">
                 <div className="word-container">
                     {brokenUpWord.map((char, index) =>
@@ -119,7 +93,7 @@ function Katakana() {
             </div>
 
 
-            <KanaKeyboard sendData={setKanaInput} onEnter={handleSubmit}/>
+            <KanaKeyboard sendData={setKanaInput} onEnter={handleSubmit} resetSignal={trigger}/>
 
             <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <h1 className="answer"> This is the answer (DEV-ONLY)</h1>
