@@ -1,11 +1,11 @@
 .word-container{
     /* background-color: white; */
     height: 5em;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;   
+    align-items: center;  
 }
 
 .question-container{
