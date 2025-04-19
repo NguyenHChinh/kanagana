@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import KanaBox from "./KanaBox";
 import KanaKeyboard from "./KanaKeyboard";
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
+import './WordSelector.css';
 
 function WordSelector() {
     // TOOD: Add global event listener
@@ -70,18 +71,18 @@ function WordSelector() {
         handleInputChange(kanaInput);
     }, [kanaInput]);
 
-    useEffect(() => {
-        let areEqual = answer.length === expectedAnswer.length &&
-        answer.every((char, i) => char === expectedAnswer[i]);
+    // useEffect(() => {
+    //     let areEqual = answer.length === expectedAnswer.length &&
+    //     answer.every((char, i) => char === expectedAnswer[i]);
 
-        if (expectedAnswer.length == 0) {
-            areEqual = false;
-        }
+    //     if (expectedAnswer.length == 0) {
+    //         areEqual = false;
+    //     }
 
-        if (areEqual) {
-            console.log("DING DING DING");
-        }
-    }, [answer, expectedAnswer]);
+    //     if (areEqual) {
+    //         console.log("DING DING DING");
+    //     }
+    // }, [answer, expectedAnswer]);
 
     const handleInputChange = (e) => {
         if (e.length > brokenUpWord.length) {
@@ -94,6 +95,10 @@ function WordSelector() {
             }
             setAnswer(temp);
         }
+    }
+
+    function handleSubmit() {
+        console.log("Enter pressed yay");
     }
 
     function convertKana(str) {
@@ -109,22 +114,16 @@ function WordSelector() {
                 }
             </div>
 
+            <KanaKeyboard sendData={setKanaInput} onEnter={handleSubmit}/>
+
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <h1 className="answer"> This is the answer (DEV-ONLY)</h1>
             <div className="word-container">
                 {expectedAnswer.map((char, index) =>
                         <KanaBox char={char} key={index}/>
                     )
                 }
             </div>
-
-            <div className="word-container">
-                {answer.map((char, index) =>
-                        <KanaBox char={char} key={index}/>
-                    )
-                }
-            </div>
-
-            <KanaKeyboard sendData={setKanaInput}/>
-
         </>
     )
 }

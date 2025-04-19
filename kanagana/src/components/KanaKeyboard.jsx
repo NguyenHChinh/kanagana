@@ -12,7 +12,7 @@
 import { useState, useEffect } from "react";
 import "./KanaKeyboard.css";
 
-function KanaKeyboard({ sendData }) {
+function KanaKeyboard({ sendData, onEnter }) {
     const [updatedInput, setUpdatedInput] = useState("");
     const [characters, setCharacters] = useState("");
     const [romajiBuffer, setRomajiBuffer] = useState("");
@@ -53,6 +53,13 @@ function KanaKeyboard({ sendData }) {
             else {
                 console.log("NOTHING TO ERASE");
             }
+        }
+
+        if (e.key === "Enter") {
+            if (onEnter) {
+                onEnter();
+            }
+            return;
         }
 
         if (e.key.length === 1 && e.key.match(/[a-zA-Z\-]/)) {
