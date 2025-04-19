@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import KanaBox from "./KanaBox";
 import KanaKeyboard from "./KanaKeyboard";
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
@@ -17,7 +16,17 @@ function WordSelector() {
     const [kanaInput, setKanaInput] = useState("");
     const [expectedAnswer, setExpectedAnswer] = useState([]);
 
-    const { kanaType } = useParams();
+    const getRandomWord = () => {
+        if (words.length > 0) {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            return words[randomIndex];
+        }
+        return null;
+    };
+
+    function convertKana(str) {
+        return str.split('').map(char => katakanaToHiragana[char] || char).join('');
+    }
 
     useEffect(() => {
         const fetchKana = async () => {
@@ -59,32 +68,11 @@ function WordSelector() {
         }
     }, [brokenUpWord]);
 
-    const getRandomWord = () => {
-        if (words.length > 0) {
-            const randomIndex = Math.floor(Math.random() * words.length);
-            return words[randomIndex];
-        }
-        return null;
-    };
-
     useEffect(() => {
-        handleInputChange(kanaInput);
+        updateAnswerArray(kanaInput);
     }, [kanaInput]);
 
-    // useEffect(() => {
-    //     let areEqual = answer.length === expectedAnswer.length &&
-    //     answer.every((char, i) => char === expectedAnswer[i]);
-
-    //     if (expectedAnswer.length == 0) {
-    //         areEqual = false;
-    //     }
-
-    //     if (areEqual) {
-    //         console.log("DING DING DING");
-    //     }
-    // }, [answer, expectedAnswer]);
-
-    const handleInputChange = (e) => {
+    const updateAnswerArray = (e) => {
         if (e.length > brokenUpWord.length) {
             setAnswer(e.substring(0, brokenUpWord.length).split(""));
         }
@@ -98,11 +86,20 @@ function WordSelector() {
     }
 
     function handleSubmit() {
-        console.log("Enter pressed yay");
-    }
+        let areEqual = answer.length === expectedAnswer.length &&
+        answer.every((char, i) => char === expectedAnswer[i]);
 
-    function convertKana(str) {
-        return str.split('').map(char => katakanaToHiragana[char] || char).join('');
+        if (expectedAnswer.length == 0) {
+            areEqual = false;
+        }
+
+        if (areEqual) {
+            console.log("Correct answer!");
+        }
+        else {
+            console.log("Wrong answer!");
+            // Perhaps add a shake animation?
+        }
     }
 
     return(
@@ -113,6 +110,14 @@ function WordSelector() {
                     )
                 }
             </div>
+
+            <div className="word-container">
+                {answer.map((char, index) =>
+                        <KanaBox char={char} key={index}/>
+                    )
+                }
+            </div>
+
 
             <KanaKeyboard sendData={setKanaInput} onEnter={handleSubmit}/>
 
