@@ -1,7 +1,14 @@
 .kana-keyboard-container{
-    background-color: white;
-    height: 3em;
+    background-color: #282c34;
+    height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
+    font-size: 1em;
+}
+
+.placeholder{
+    color: rgb(94, 94, 94);
+    opacity: 0.6;
 }

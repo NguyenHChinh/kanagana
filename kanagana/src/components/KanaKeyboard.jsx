@@ -122,8 +122,9 @@ function KanaKeyboard({ sendData, onEnter, resetSignal }) {
         <div className="kana-keyboard-container"
             tabIndex={0}
             onKeyDown={handleKeyDown}>
-            <h1>{ updatedInput }</h1>
-            {/* <input type="text" onChange={(e) => inputChange(e)}></input> */}
+            <h1 className={updatedInput ? "" : "placeholder"}>
+                {updatedInput || "Answer here.."}
+            </h1>
         </div>
     )
 }
