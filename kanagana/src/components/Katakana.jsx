@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import WordSelector from './WordSelector';
 import KanaBox from './KanaBox';
 import KanaKeyboard from './KanaKeyboard';
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
@@ -29,6 +28,9 @@ function Katakana() {
     // USER INPUT + ARRAY FORM
     const [kanaInput, setKanaInput] = useState("");
     const [kanaInputArray, setKanaInputArray] = useState([]);
+
+    // ARRAY TO EVALUATE EACH "KANA" IN ANSWER
+    const [evaluation, setEvaluation] = useState([]);
 
     // STATE USED TO TRIGGER COMPONENTS
     const [trigger, setTrigger] = useState(0);
@@ -61,18 +63,33 @@ function Katakana() {
     }, [kanaInput]);
 
     function handleSubmit() {
-        let areEqual = kanaInputArray.length === currentWordHiragana.length &&
-        kanaInputArray.every((char, i) => char === currentWordHiragana[i]);
-
-        if (currentWordHiragana.length == 0) {
-            areEqual = false;
+        if (currentWordHiragana.length === 0) {
+            console.log("Critical Error: Empty Answer Array! How did you get here?");
+            return;
         }
 
-        if (areEqual) {
+        const newEvaluation = [];
+
+        for (let i = 0; i < currentWordHiragana.length; i++) {
+            if (i >= kanaInput.length) {
+                newEvaluation.push("missing");
+            } else if (kanaInput[i] === currentWordHiragana[i]) {
+                newEvaluation.push("correct");
+            } else {
+                newEvaluation.push("incorrect");
+            }
+        }
+
+        setEvaluation(newEvaluation);
+
+        const allCorrect = newEvaluation.every(status => status === "correct");
+
+        if (allCorrect) {
             console.log("Correct answer!");
             const newWord = getRandomWord();
             setCurrentWord(newWord);
             setTrigger(c => c + 1);
+            setEvaluation([]);
         }
         else {
             console.log("Wrong answer!");
