@@ -102,14 +102,21 @@ function Katakana() {
             <div className="question-container">
                 <div className="word-container">
                     {currentWordArray.map((char, index) =>
-                            <KanaBox char={char} key={index}/>
+                            <KanaBox
+                                char={char}
+                                key={index}
+                            />
                         )
                     }
                 </div>
 
                 <div className="word-container">
                     {kanaInputArray.map((char, index) =>
-                            <KanaBox char={char} key={index}/>
+                            <KanaBox
+                                char={char}
+                                key={index}
+                                status={evaluation[index]}
+                            />
                         )
                     }
                 </div>
@@ -122,7 +129,10 @@ function Katakana() {
             <h1 className="answer"> This is the answer (DEV-ONLY)</h1>
             <div className="word-container">
                 {currentWordHiragana.map((char, index) =>
-                        <KanaBox char={char} key={index}/>
+                        <KanaBox
+                            char={char}
+                            key={index}
+                        />
                     )
                 }
             </div>

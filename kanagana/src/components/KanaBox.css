@@ -1,9 +1,50 @@
-.kana-box{
-    /* background-color: rgb(172, 172, 172); */
+.kana-box {
     width: 2.5em;
+    height: 2.5em;
     font-size: 2rem;
     color: white;
     font-weight: 900;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     font-family: 'Arial', sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0.2em;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* INCORRECT -> RED BORDER + SHAKE */
+.kana-box.incorrect {
+    animation: shake 0.3s;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+/* MISSING -> BLINK WHITE UNDERLINE */
+.kana-box.missing {
+    border-bottom: 4px dashed white;
+    animation: flash-underline 1s ease-in-out 2;
+}
+
+/* CORRECT -> GREEN BORDER */
+.kana-box.correct {
+    box-shadow: 0 0 6px rgba(0, 255, 0, 0.5);
+}
+
+/* SHAKE ANIMATION */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+}
+
+/* FLASHING UNDERLINE */
+@keyframes flash-underline {
+    0%, 100% { border-bottom-color: transparent; }
+    50% { border-bottom-color: rgb(255, 255, 255); }
 }

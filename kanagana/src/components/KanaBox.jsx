@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import './Kanabox.css';
 
-function KanaBox(props) {
+function KanaBox( {char, status} ) {
+
+    if (status) {
+        console.log(`kana-box${status}`);
+    }
 
     return(
-        <div className="kana-box">
-            <h1>{ props.char }</h1>
+        <div className={`kana-box${status ? " " + status : ""}`}>
+            <h1>{ char }</h1>
         </div>
     )
 }
