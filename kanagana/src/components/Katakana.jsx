@@ -50,6 +50,8 @@ function Katakana() {
 
     // Adjusting the array such that allows for .map function
     useEffect(() => {
+        setEvaluation([]);
+
         if (kanaInput.length > currentWordArray.length) {
             setKanaInputArray(kanaInput.substring(0, currentWordArray.length).split(""));
         }
@@ -93,7 +95,9 @@ function Katakana() {
         }
         else {
             console.log("Wrong answer!");
-            // Perhaps add a shake animation?
+            setTimeout(() => {
+                setEvaluation([]);
+            }, 3000);
         }
     }
 
@@ -114,7 +118,7 @@ function Katakana() {
                     {kanaInputArray.map((char, index) =>
                             <KanaBox
                                 char={char}
-                                key={index}
+                                key={`${index}-${trigger}-${char}`}
                                 status={evaluation[index]}
                             />
                         )
