@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import hiraganaCharacters from '../data/hiraganaCharacters.json';
+import KanaBox from './KanaBox';
+import './SharedStyles.css';
 
 const getRandomHiragana = () => {
     return Object.keys(hiraganaCharacters)[Math.floor(Math.random() * Object.keys(hiraganaCharacters).length)];
@@ -10,7 +12,13 @@ function Hiragana() {
 
     return(
         <>
-            <h1>{currentHiragana}</h1>
+            <div className="question-container">
+                <div className="word-container">
+                    <KanaBox
+                        char={currentHiragana}
+                    />
+                </div>
+            </div>
         </>
     )
 }
