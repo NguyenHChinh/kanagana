@@ -3,7 +3,7 @@ import KanaBox from './KanaBox';
 import KanaKeyboard from './KanaKeyboard';
 import katakanaToHiragana from '../data/katakanaToHiragana.json'
 import katakanaWords from '../data/katakanaWords.json';
-import './Katakana.css';
+import './SharedStyles.css';
 
 const getRandomWord = () => {
     return katakanaWords[Math.floor(Math.random() * katakanaWords.length)];
