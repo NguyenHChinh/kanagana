@@ -87,7 +87,9 @@ function KanaKeyboard({ sendData, onEnter, resetSignal }) {
                 if (characters) {
                     newCharacters = [...characters];
                 }
-                newCharacters.push(matchedKana);
+                for (let i = 0; i < matchedKana.length; i++) {
+                    newCharacters.push(matchedKana[i]);
+                }
                 setCharacters(newCharacters);
                 setRomajiBuffer(updatedBuffer.slice(matchLength));
             
