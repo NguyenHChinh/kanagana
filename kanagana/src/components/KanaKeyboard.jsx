@@ -9,6 +9,10 @@
 // In the meantime, I will be developing this for the use of the
 // katakana tool, since showing the hiragana would make sense.
 
+// Developer Note Update: I think this component could be used
+// in the future, more than just a katakana practice keyboard.
+// It could be used for a future "Kanji" practice tool, maybe!
+
 import { useState, useEffect } from "react";
 import "./KanaKeyboard.css";
 
