@@ -1,4 +1,4 @@
-import './Kanabox.css';
+import './KanaBox.css';
 
 function KanaBox({ char, status }) {
     return (
