@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import hiraganaCharacters from '../data/hiraganaCharacters.json';
 import KanaBox from './KanaBox';
+import Keyboard from './Keyboard';
 import './SharedStyles.css';
 
 const getRandomHiragana = () => {
@@ -19,6 +20,8 @@ function Hiragana() {
                     />
                 </div>
             </div>
+
+            <Keyboard/>
         </>
     )
 }
