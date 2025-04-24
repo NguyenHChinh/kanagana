@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Homepage() {
-  return (
-    <div className="homepage">
-        <header className="hero">
-            <h1>Master Japanese Hiragana and Katakana</h1>
-            <p>Interactive, beginner-friendly practice for beginner to intermediate Japanese learners</p>
-            <div className="hero-buttons"></div>
-                <button>Start Practicing</button>
-                <button>Track Progress</button>
-        </header>
-    </div>
-  );
-}
+    const navigate = useNavigate();
+
+    return (
+        <div className="homepage">
+            <header className="hero">
+                <h1>Master Japanese Hiragana and Katakana</h1>
+                <p>Interactive, beginner-friendly practice for beginner to intermediate Japanese learners</p>
+                <div className="hero-buttons"></div>
+                    <button onClick={() => navigate("/practice")}>Start Practicing</button>
+                    <button onClick={() => navigate("/progress")}>Track Progress</button>
+            </header>
+        </div>
+    );
+    }
 
 export default Homepage;
