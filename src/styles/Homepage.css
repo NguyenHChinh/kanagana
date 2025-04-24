@@ -1,0 +1,43 @@
+.homepage{
+    font-family: 'Arial', sans-serif;
+    color: #1c1f25;
+    background-color: #f5f4f1;
+    text-align: center;
+    padding: 1rem;
+    margin-top: -20px;
+}
+
+.hero{
+    background-size: cover;
+    padding: 2rem 2rem;
+    border-radius: 1rem;
+}
+
+.hero h1{
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons button {
+    margin: 0 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hero-buttons button:first-child{
+    background-color: #f37171;
+    color: white;
+}
+
+.hero-buttons button:last-child{
+    background-color: #d4d8df;
+    color: #1c1f25
+}
