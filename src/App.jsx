@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import Practice from "./pages/Practice";
 import Home from './pages/Home.jsx';
@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <BrowserRouter basename="/kanagana">
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -28,7 +28,7 @@ function App() {
         <Route path="/progress" element={<Progress/>}/>
         <Route path="/about" element={<About/>}/>
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 
