@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import hiraganaCharacters from '../data/hiraganaCharacters.json';
 import KanaBox from './KanaBox';
 import Keyboard from './Keyboard';
-import './SharedStyles.css';
+import '../styles/SharedStyles.css';
 
 const getRandomHiragana = () => {
     return Object.keys(hiraganaCharacters)[Math.floor(Math.random() * Object.keys(hiraganaCharacters).length)];

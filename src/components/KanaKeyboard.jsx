@@ -15,7 +15,7 @@
 
 import { useState, useEffect } from "react";
 import kana from '../data/kana.json';
-import "./KanaKeyboard.css";
+import "../styles/KanaKeyboard.css";
 
 function KanaKeyboard({ sendData, onEnter, resetSignal }) {
     const [characters, setCharacters] = useState([]);
