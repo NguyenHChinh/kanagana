@@ -14,10 +14,10 @@
 // It could be used for a future "Kanji" practice tool, maybe!
 
 import { useState, useEffect } from "react";
+import kana from '../data/kana.json';
 import "./KanaKeyboard.css";
 
 function KanaKeyboard({ sendData, onEnter, resetSignal }) {
-    const [kana, setKana] = useState({});
     const [characters, setCharacters] = useState([]);
     const [romajiBuffer, setRomajiBuffer] = useState("");
     const [updatedInput, setUpdatedInput] = useState("");
@@ -27,21 +27,6 @@ function KanaKeyboard({ sendData, onEnter, resetSignal }) {
         setRomajiBuffer("");
         sendData("");
     }, [resetSignal]);
-
-    useEffect(() => {
-        const fetchKana = async () => {
-            try {
-                const response = await fetch('/kana.json');
-                const data = await response.json();
-                // console.log(data);
-                setKana(data);
-            } catch (error) {
-                console.error('Error loading kana:', error);
-            }
-        };
-        
-        fetchKana();
-    }, []);
 
     function handleKeyDown(e) {
         if (e.key === "Backspace") {
