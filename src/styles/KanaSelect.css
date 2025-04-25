@@ -1,7 +1,7 @@
 .kana-select{
     font-size: 4rem;
     font-weight: 900;
-    color: white;
+    color: #182e3a;
     margin-top: 20px;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -13,8 +13,8 @@
 }
 
 .kana-select:hover{
-    color: rgb(255, 255, 255);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    color: #182e3a;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
     transition: color 0.3s ease, text-shadow 0.2s ease;
     cursor: pointer;
     transform: scale(1.05);
