@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #16181d;
+    background-color: #182e3a;
     padding: 16px 16px;
     color: white;
     width: 100%;
@@ -21,7 +21,7 @@
   .navbar-logo a {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ffffff;
+    color: #f5f4f1;
     text-decoration: none;
   }
   
@@ -35,7 +35,7 @@
   }
   
   .navbar-links li a {
-    color: white;
+    color: #f5f4f1;
     text-decoration: none;
     font-size: 1rem;
   }

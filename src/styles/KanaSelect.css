@@ -14,8 +14,8 @@
 
 .kana-select:hover{
     color: #182e3a;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-    transition: color 0.3s ease, text-shadow 0.2s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s ease, text-shadow 0.1s ease;
     cursor: pointer;
     transform: scale(1.05);
 }
