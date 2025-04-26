@@ -104,6 +104,7 @@ function Katakana() {
     return(
         <>
             <div className="question-container">
+                <p>Type the reading for..</p>
                 <div className="word-container">
                     {currentWordArray.map((char, index) =>
                             <KanaBox
@@ -120,6 +121,7 @@ function Katakana() {
                                 char={char}
                                 key={`${index}-${trigger}-${char}`}
                                 status={evaluation[index]}
+                                isInput={true}
                             />
                         )
                     }
@@ -129,7 +131,7 @@ function Katakana() {
 
             <KanaKeyboard sendData={setKanaInput} onEnter={handleSubmit} resetSignal={trigger}/>
 
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <h1 className="answer"> This is the answer (DEV-ONLY)</h1>
             <div className="word-container">
                 {currentWordHiragana.map((char, index) =>
@@ -139,7 +141,7 @@ function Katakana() {
                         />
                     )
                 }
-            </div>
+            </div> */}
         </>
     )
 }

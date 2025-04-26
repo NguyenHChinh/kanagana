@@ -5,4 +5,5 @@ body{
     padding-top: 60px;
     background-color: var(--kgWhite);
     color: var(--kgBlue);
+    font-family: 'Arial', sans-serif;
 }

@@ -1,10 +1,10 @@
 @import './variables.css';
 
 .word-container{
-    /* background-color: white; */
+    /* background-color: green; */
     height: 5em;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 30px;
     display: flex;
     justify-content: center;
     align-items: center;  
@@ -16,4 +16,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    /* padding-bottom: 10px; */
+}
+
+p{
+    font-size: 1.5em;
+    text-align: center;
+    color: var(--kgGray);
+    padding-top: 20px;
 }
