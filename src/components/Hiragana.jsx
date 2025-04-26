@@ -10,6 +10,13 @@ const getRandomHiragana = () => {
 
 function Hiragana() {
     const [currentHiragana, setCurrentHiragana] = useState(getRandomHiragana());
+    const [userInput, setUserInput] = useState("");
+    const [isCorrect, setIsCorrect] = useState(false);
+    const [trigger, setTrigger] = useState(0);
+    
+    function handleSubmit() {
+        console.log(`User input: ${userInput}`);
+    }
 
     return(
         <>
@@ -24,7 +31,11 @@ function Hiragana() {
                 </div>
             </div>
 
-            <Keyboard/>
+            <Keyboard
+                sendData={setUserInput}
+                onEnter={handleSubmit}
+                resetSignal={trigger}
+            />
         </>
     )
 }

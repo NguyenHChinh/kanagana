@@ -3,14 +3,29 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/Keyboard.css";
 
-function Keyboard( sendData, resetSignal, isCorrect) {
+function Keyboard({ sendData, onEnter, resetSignal, isCorrect }) {
     const [input, setInput] = useState("");
     const [isFocused, setIsFocused] = useState(false);
 
     const inputRef = useRef(null);
 
     function handleKeyDown(e) {
-        
+        if (e.key === "Backspace") {
+            setInput(input.slice(0, -1));
+        }
+
+        if (e.key === "Enter") {
+            if (onEnter) {
+                onEnter();
+            }
+            return;
+        }
+
+        else if (e.key.length === 1 && e.key.match(/[a-zA-Z\-]/)) {
+            const output = input + e.key.toLowerCase();
+            setInput(output);
+            sendData(output);
+        }
     }
 
     function focusInput() {
