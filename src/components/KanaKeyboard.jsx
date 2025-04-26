@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 import kana from '../data/kana.json';
 import "../styles/KanaKeyboard.css";
 
-function KanaKeyboard({ sendData, onEnter, resetSignal }) {
+function KanaKeyboard({ sendData, onEnter, resetSignal, isCorrect }) {
     const [characters, setCharacters] = useState([]);
     const [romajiBuffer, setRomajiBuffer] = useState("");
     const [updatedInput, setUpdatedInput] = useState("");
@@ -110,7 +110,7 @@ function KanaKeyboard({ sendData, onEnter, resetSignal }) {
     }, [characters, romajiBuffer]);
     
     return(
-        <div className="kana-keyboard-container"
+        <div className={`kana-keyboard-container ${isCorrect ? "correct" : ""}`}
             tabIndex={0}
             onKeyDown={handleKeyDown}>
             <h1 className={updatedInput ? "" : "placeholder"}>

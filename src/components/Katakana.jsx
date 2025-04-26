@@ -33,6 +33,9 @@ function Katakana() {
     const [evaluation, setEvaluation] = useState([]);
 
     // STATE USED TO TRIGGER COMPONENTS
+    const [isCorrect, setIsCorrect] = useState(false);
+
+    // STATE USED TO TRIGGER COMPONENTS
     const [trigger, setTrigger] = useState(0);
 
     useEffect(() => {
@@ -65,6 +68,14 @@ function Katakana() {
     }, [kanaInput]);
 
     function handleSubmit() {
+        if (isCorrect) {
+            const newWord = getRandomWord();
+            setCurrentWord(newWord);
+            setTrigger(c => c + 1);
+            setIsCorrect(false);
+            return;
+        }
+
         if (currentWordHiragana.length === 0) {
             console.log("Critical Error: Empty Answer Array! How did you get here?");
             return;
@@ -88,10 +99,7 @@ function Katakana() {
 
         if (allCorrect) {
             console.log("Correct answer!");
-            const newWord = getRandomWord();
-            setCurrentWord(newWord);
-            setTrigger(c => c + 1);
-            setEvaluation([]);
+            setIsCorrect(true);
         }
         else {
             console.log("Wrong answer!");
@@ -120,7 +128,7 @@ function Katakana() {
                             <KanaBox
                                 char={char}
                                 key={`${index}-${trigger}-${char}`}
-                                status={evaluation[index]}
+                                status={isCorrect ? undefined : evaluation[index]}
                                 isInput={true}
                             />
                         )
@@ -129,19 +137,12 @@ function Katakana() {
             </div>
 
 
-            <KanaKeyboard sendData={setKanaInput} onEnter={handleSubmit} resetSignal={trigger}/>
-
-            {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <h1 className="answer"> This is the answer (DEV-ONLY)</h1>
-            <div className="word-container">
-                {currentWordHiragana.map((char, index) =>
-                        <KanaBox
-                            char={char}
-                            key={index}
-                        />
-                    )
-                }
-            </div> */}
+            <KanaKeyboard
+                sendData={setKanaInput}
+                onEnter={handleSubmit}
+                resetSignal={trigger}
+                isCorrect={isCorrect}
+            />
         </>
     )
 }
