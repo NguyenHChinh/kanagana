@@ -111,16 +111,18 @@ function Katakana() {
 
     return(
         <>
-            <div className="question-container">
-                <p>Type the reading for..</p>
-                <div className="word-container">
-                    {currentWordArray.map((char, index) =>
-                            <KanaBox
-                                char={char}
-                                key={index}
-                            />
-                        )
-                    }
+            <div className="katakana-container">
+                <div className="prompt">
+                    <p>Type the reading for..</p>
+                    <div className="word-container">
+                        {currentWordArray.map((char, index) =>
+                                <KanaBox
+                                    char={char}
+                                    key={index}
+                                />
+                            )
+                        }
+                    </div>
                 </div>
 
                 <div className="word-container">

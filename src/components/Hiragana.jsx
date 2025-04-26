@@ -13,11 +13,14 @@ function Hiragana() {
 
     return(
         <>
-            <div className="question-container">
-                <div className="word-container">
-                    <KanaBox
-                        char={currentHiragana}
-                    />
+            <div className="hiragana-container">
+                <div className="prompt">
+                    <p>Type the reading for..</p>
+                    <div className="word-container">
+                        <KanaBox
+                            char={currentHiragana}
+                        />
+                    </div>
                 </div>
             </div>
 

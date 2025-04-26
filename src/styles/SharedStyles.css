@@ -10,7 +10,16 @@
     align-items: center;  
 }
 
-.question-container{
+.hiragana-container{
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.katakana-container{
     height: 40vh;
     display: flex;
     justify-content: center;
