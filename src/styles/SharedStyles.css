@@ -1,3 +1,5 @@
+@import './variables.css';
+
 .word-container{
     /* background-color: white; */
     height: 5em;

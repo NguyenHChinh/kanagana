@@ -1,8 +1,10 @@
+@import './variables.css';
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #182e3a;
+    background-color: var(--kgBlue);
     padding: 16px 16px;
     color: white;
     width: 100%;

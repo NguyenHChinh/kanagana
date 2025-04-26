@@ -1,5 +1,7 @@
+@import './variables.css';
+
 .kana-keyboard-container{
-    background-color: #1c1f25;
+    background-color: var(--kgBlue);
     height: 3.5em;
     display: flex;
     justify-content: center;
@@ -14,11 +16,11 @@
 }
 
 .kana-keyboard-container:focus{
-    outline: 2px solid white;
+    outline: 2px solid black;
     outline-offset: 2px;
 }
 
 .placeholder{
-    color: rgb(94, 94, 94);
+    color: var(--kgWhite);
     opacity: 0.6;
 }

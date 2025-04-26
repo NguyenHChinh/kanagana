@@ -1,7 +1,9 @@
+@import './variables.css';
+
 .homepage{
     font-family: 'Arial', sans-serif;
-    color: #182e3a;
-    background-color: #f5f4f1;
+    color: var(--kgBlue);
+    background-color: var(--kgWhite);
     text-align: center;
     padding: 1rem;
     margin-top: -20px;
@@ -16,7 +18,7 @@
 .hero h1{
     font-size: 3rem;
     font-weight: 600;
-    color: #182e3a;
+    color: var(--kgBlue);
 }
 
 .hero p {

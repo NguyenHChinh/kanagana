@@ -1,6 +1,8 @@
+@import 'styles/variables.css';
+
 body{
     margin: 0;
     padding-top: 60px;
-    background-color: #f5f4f1;
-    color: #182e3a;
+    background-color: var(--kgWhite);
+    color: var(--kgBlue);
 }
