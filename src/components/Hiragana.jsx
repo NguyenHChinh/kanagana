@@ -15,7 +15,11 @@ function Hiragana() {
     const [trigger, setTrigger] = useState(0);
     
     function handleSubmit() {
+        const correctAnswers = hiraganaCharacters[currentHiragana];
+        const isCorrect = correctAnswers.includes(userInput);
+    
         console.log(`User input: ${userInput}`);
+        console.log(isCorrect ? "Correct!" : "Incorrect!");
     }
 
     return(
