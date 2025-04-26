@@ -18,8 +18,12 @@ function Hiragana() {
         const correctAnswers = hiraganaCharacters[currentHiragana];
         const isCorrect = correctAnswers.includes(userInput);
     
-        console.log(`User input: ${userInput}`);
-        console.log(isCorrect ? "Correct!" : "Incorrect!");
+        if (isCorrect) {
+            setCurrentHiragana(getRandomHiragana());
+            setUserInput("");
+            setTrigger(prev => prev + 1);
+        }
+        setIsCorrect(isCorrect);
     }
 
     return(

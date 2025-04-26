@@ -9,6 +9,15 @@ function Keyboard({ sendData, onEnter, resetSignal, isCorrect }) {
 
     const inputRef = useRef(null);
 
+    useEffect(() => {
+        setInput("");
+        sendData("");
+
+        if (inputRef.current) {
+            inputRef.current.value = "";
+        }
+    }, [resetSignal]);
+
     function handleKeyDown(e) {
         if (e.key === "Backspace") {
             setInput(input.slice(0, -1));
