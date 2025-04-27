@@ -15,6 +15,27 @@ function Homepage() {
                     <button onClick={() => navigate("/progress")}>Track Progress</button>
                 </div>
             </header>
+
+            <section className="features">
+                <h2>How It Works</h2>
+                <div className="feature-list">
+                    <div className="feature-item">
+                        <span className="icon">📚</span>
+                        <h3>Study Smarter</h3>
+                        <p>Master kana with targeted practice and repetition</p>
+                    </div>
+                    <div className="feature-item">
+                        <span className="icon">📈</span>
+                        <h3>Track Progress</h3>
+                        <p>See how far you've come with mastery levels</p>
+                    </div>
+                        <div className="feature-item">
+                        <span className="icon">⏱️</span>
+                        <h3>Quick Sessions</h3>
+                        <p>Hop in anytime, practice at your own pace</p>
+                    </div>
+                </div>
+            </section>
         </div>
     );
     }
