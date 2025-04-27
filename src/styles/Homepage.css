@@ -5,13 +5,19 @@
     color: var(--kgBlue);
     background-color: var(--kgWhite);
     text-align: center;
-    padding: 1rem;
-    margin-top: -20px;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+    max-width: 800px;
+    position: relative;
+    border-radius: 1.5rem;
+    box-shadow: 
+        -12px 0 12px rgba(0, 0, 0, 0.15),
+         12px 0 12px rgba(0, 0, 0, 0.15);
 }
 
 .hero{
     background-size: cover;
-    padding: 2rem 2rem;
+    padding: 0rem 2rem;
     border-radius: 1rem;
 }
 

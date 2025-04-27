@@ -1,0 +1,25 @@
+.floating-kana-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.kana {
+    position: absolute;
+    color: rgba(20, 58, 59, 0.15);
+    font-weight: bold;
+    user-select: none;
+    filter: blur(0.5px);
+    animation: floatAround ease-in-out infinite;
+}
+
+@keyframes floatAround {
+    0% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-20px) translateX(10px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FloatingKana from './FloatingKana';
 import '../styles/Homepage.css';
 
 function Homepage() {
@@ -36,6 +37,8 @@ function Homepage() {
                     </div>
                 </div>
             </section>
+
+            <FloatingKana/>
         </div>
     );
     }
