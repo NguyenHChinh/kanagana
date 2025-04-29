@@ -19,7 +19,11 @@ function Hiragana() {
     
     function handleSubmit() {
         if (isCorrect) {
-            setCurrentHiragana(getRandomHiragana());
+            let newKana = getRandomHiragana();
+            while (newKana === currentHiragana) {
+                newKana = getRandomHiragana();
+            }
+            setCurrentHiragana(newKana);
             setUserInput("");
             setTrigger(prev => prev + 1);
             setIsCorrect(false);
