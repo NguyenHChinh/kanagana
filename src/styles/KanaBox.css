@@ -39,6 +39,10 @@
     box-shadow: 0 0 6px rgba(0, 255, 0, 0.5);
 }
 
+.kana-box.shake{
+    animation: shake 0.3s;
+}
+
 /* SHAKE ANIMATION */
 @keyframes shake {
     0% { transform: translateX(0); }
