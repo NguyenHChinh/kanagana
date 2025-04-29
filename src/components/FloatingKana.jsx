@@ -14,7 +14,22 @@ function FloatingKana() {
 
 const generateKana = () => {
   const list = [...hiragana, ...katakana];
-  const totalKana = 250;
+
+  let totalKana;
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth < 500) {
+    totalKana = 60;   // Small phones
+  } else if (screenWidth < 800) {
+    totalKana = 100;  // Tablets / small laptops
+  } else if (screenWidth < 1200) {
+    totalKana = 180;  // Medium desktops
+  } else {
+    totalKana = 250;  // Large desktops
+  }
+  
+  console.log(`Total Kana: ${totalKana}`);
+
   const slotSize = 100 / totalKana;
 
   return Array.from({ length: totalKana }).map((_, i) => {
