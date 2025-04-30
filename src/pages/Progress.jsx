@@ -31,23 +31,23 @@ function Progress() {
             <p className="subtitle">Coming Soon! Stay tuned.</p>
 
             <div className="preview-blur">
-                <div className="kana-split-row">
-                    <div className="kana-side">
-                        <h2 className="kana-type">Hiragana</h2>
-                        <div className="kana-flex">
+                <div className="progress-kana-split-row">
+                    <div className="progress-kana-side">
+                        <h2 className="progress-kana-type">Hiragana</h2>
+                        <div className="progress-kana-flex">
                             {hiraganaProgress.map(({ char, percent }, i) => (
-                                <div className={`kana-box ${getColorClass(percent)}`} key={`h-${i}`}>
+                                <div className={`progress-kana-box ${getColorClass(percent)}`} key={`h-${i}`}>
                                 <h1>{char}</h1>
                                 <p>{percent}%</p>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="kana-side">
-                        <h2 className="kana-type">Katakana</h2>
-                        <div className="kana-flex">
+                    <div className="progress-kana-side">
+                        <h2 className="progress-kana-type">Katakana</h2>
+                        <div className="progress-kana-flex">
                             {katakanaProgress.map(({ char, percent }, i) => (
-                                <div className={`kana-box ${getColorClass(percent)}`} key={`k-${i}`}>
+                                <div className={`progress-kana-box ${getColorClass(percent)}`} key={`k-${i}`}>
                                 <h1>{char}</h1>
                                 <p>{percent}%</p>
                                 </div>
