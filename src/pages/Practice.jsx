@@ -4,6 +4,7 @@ import KanaKeyboard from "../components/KanaKeyboard";
 import WordSelector from "../components/WordSelector";
 import Hiragana from '../components/Hiragana.jsx';
 import Katakana from '../components/Katakana.jsx';
+import HiraganaWords from '../components/HiraganaWords.jsx';
 import KatakanaWords from '../components/KatakanaWords.jsx';
 
 function Practice() {
@@ -15,6 +16,7 @@ function Practice() {
             {kanaType === "hiragana" && <Hiragana />}
             {kanaType === "katakana" && <Katakana />}
             {kanaType === "katakana-words" && <KatakanaWords />}
+            {kanaType === "hiragana-words" && <HiraganaWords />}
         </>
     )
 }
