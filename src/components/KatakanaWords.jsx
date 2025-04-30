@@ -111,7 +111,7 @@ function Katakana() {
 
     return(
         <>
-            <div className="katakana-container">
+            <div className="words-container">
                 <div className="prompt">
                     <p>Type the reading for..</p>
                     <div className="word-container">

@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import hiraganaCharacters from '../data/hiraganaCharacters.json';
+import katakanaCharacters from '../data/katakanaCharacters.json';
 import KanaBox from './KanaBox';
 import Keyboard from './Keyboard';
 import '../styles/SharedStyles.css';
 
-const getRandomHiragana = () => {
-    return Object.keys(hiraganaCharacters)[Math.floor(Math.random() * Object.keys(hiraganaCharacters).length)];
+const getRandomKatakana = () => {
+    return Object.keys(katakanaCharacters)[Math.floor(Math.random() * Object.keys(katakanaCharacters).length)];
   };
 
-function Hiragana() {
-    const [currentHiragana, setCurrentHiragana] = useState(getRandomHiragana());
+function Katakana() {
+    const [currentKatakana, setCurrentKatakana] = useState(getRandomKatakana());
     const [userInput, setUserInput] = useState("");
     const [isCorrect, setIsCorrect] = useState(false);
     const [evaluation, setEvaluation] = useState("");
@@ -19,11 +19,11 @@ function Hiragana() {
     
     function handleSubmit() {
         if (isCorrect) {
-            let newKana = getRandomHiragana();
-            while (newKana === currentHiragana) {
-                newKana = getRandomHiragana();
+            let newKana = getRandomKatakana();
+            while (newKana === currentKatakana) {
+                newKana = getRandomKatakana();
             }
-            setCurrentHiragana(newKana);
+            setCurrentKatakana(newKana);
             setUserInput("");
             setTrigger(prev => prev + 1);
             setIsCorrect(false);
@@ -36,7 +36,7 @@ function Hiragana() {
             return;
         }
 
-        const correctAnswers = hiraganaCharacters[currentHiragana];
+        const correctAnswers = katakanaCharacters[currentKatakana];
         const userAnswer = userInput.trim().toLowerCase();
 
         const temp = correctAnswers.includes(userAnswer);
@@ -71,7 +71,7 @@ function Hiragana() {
                     <p>Type the reading for..</p>
                     <div className="word-container">
                         <KanaBox
-                            char={currentHiragana}
+                            char={currentKatakana}
                             key={`${trigger}`}
                             status={isCorrect ? undefined : evaluation}
                         />
@@ -89,4 +89,4 @@ function Hiragana() {
     )
 }
 
-export default Hiragana;
+export default Katakana;

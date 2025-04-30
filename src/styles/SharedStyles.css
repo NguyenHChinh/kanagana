@@ -10,7 +10,7 @@
     align-items: center;  
 }
 
-.hiragana-container{
+.characters-container{
     height: 30vh;
     display: flex;
     justify-content: center;
@@ -19,7 +19,7 @@
     padding-bottom: 20px;
 }
 
-.katakana-container{
+.words-container{
     height: 40vh;
     display: flex;
     justify-content: center;
