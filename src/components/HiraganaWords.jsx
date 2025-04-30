@@ -1,19 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import KanaBox from './KanaBox';
 import RomajiKeyboard from './RomajiKeyboard';
 import hiraganaToRomaji from '../data/romaji.json'
 import hiraganaWords from '../data/hiraganaWords.json';
 import '../styles/SharedStyles.css';
+import * as wanakana from "wanakana";
 
 const getRandomWord = () => {
     return hiraganaWords[Math.floor(Math.random() * hiraganaWords.length)];
 };
 
-function convertKana(str) {
-    console.log(hiraganaToRomaji);
-    let answer = str.split('').map(char => hiraganaToRomaji[char] || char).join('');
-    console.log(answer);
-    return answer;
+function checkSubmission(answer, submission) {
+    const cleaned = submission.trim().toLowerCase();
+    const asKana = wanakana.toKana(cleaned, { IMEMode: true });
+    return answer === asKana;
 }
 
 function HiraganaWords() {
@@ -24,16 +24,12 @@ function HiraganaWords() {
     // CURRENT RANDOM WORD + ARRAY FORM
     const [currentWord, setCurrentWord] = useState(getRandomWord());
     const [currentWordArray, setCurrentWordArray] = useState([]);
-
-    // CURRENT RANDOM WORD IN ROMAJI
-    const [currentAnswer, setCurrentAnswer] = useState([]);
     
-    // USER INPUT + ADJUSTED
-    const [kanaInput, setKanaInput] = useState([]);
-    const [kanaInputAdjusted, setKanaInputAdjusted] = useState([]);
+    // USER INPUT
+    const [userInput, setUserInput] = useState("");
 
     // ARRAY TO EVALUATE EACH "KANA" IN ANSWER
-    const [evaluation, setEvaluation] = useState([]);
+    const [evaluation, setEvaluation] = useState("");
 
     // STATE USED TO TRIGGER COMPONENTS
     const [isCorrect, setIsCorrect] = useState(false);
@@ -41,36 +37,13 @@ function HiraganaWords() {
     // STATE USED TO TRIGGER COMPONENTS
     const [trigger, setTrigger] = useState(0);
 
+    const shakeTimeoutRef = useRef(null);
+
     useEffect(() => {
         if (currentWord) {
             setCurrentWordArray(currentWord.split(""));
-            setCurrentAnswer(convertKana(currentWord).split(""))
         }
     }, [currentWord]);
-
-    useEffect(() => {
-        if (currentWordArray.length > 0) {
-            setKanaInput(Array(currentWordArray.length).fill(" "));
-        }
-    }, [currentWordArray]);
-
-    // Adjusting the array such that allows for .map function
-    useEffect(() => {
-
-        let adjusted = [];
-
-        if (kanaInput.length > currentWordArray.length) {
-            adjusted = kanaInput.slice(0, currentWordArray.length);
-        }
-        else {
-            adjusted = [...kanaInput];
-            while (adjusted.length < currentWordArray.length) {
-                adjusted.push(" ");
-            }
-        }
-
-        setKanaInputAdjusted(adjusted);
-    }, [kanaInput]);
 
     function handleSubmit() {
         if (isCorrect) {
@@ -78,39 +51,40 @@ function HiraganaWords() {
             setCurrentWord(newWord);
             setTrigger(c => c + 1);
             setIsCorrect(false);
-            return;
-        }
 
-        if (currentAnswer.length === 0) {
-            console.log("Critical Error: Empty Answer Array! How did you get here?");
-            return;
-        }
-
-        const newEvaluation = [];
-
-        for (let i = 0; i < currentAnswer.length; i++) {
-            if (i >= kanaInput.length) {
-                newEvaluation.push("missing");
-            } else if (kanaInput[i] === currentAnswer[i]) {
-                newEvaluation.push("correct");
-            } else {
-                newEvaluation.push("incorrect");
+            if (shakeTimeoutRef.current) {
+                clearTimeout(shakeTimeoutRef.current);
+                shakeTimeoutRef.current = null;
             }
+            setEvaluation("");
+            return;
         }
 
-        setEvaluation(newEvaluation);
+        // const correct = newEvaluation.every(status => status === "correct");
 
-        const allCorrect = newEvaluation.every(status => status === "correct");
+        const userIsCorrect = checkSubmission(currentWord, userInput);
 
-        if (allCorrect) {
+        if (userIsCorrect) {
             console.log("Correct answer!");
+            
             setIsCorrect(true);
         }
         else {
             console.log("Wrong answer!");
+            setEvaluation("");
+
             setTimeout(() => {
-                setEvaluation([]);
-            }, 3000);
+                setEvaluation("shake");
+    
+                if (shakeTimeoutRef.current) {
+                    clearTimeout(shakeTimeoutRef.current);
+                }
+    
+                shakeTimeoutRef.current = setTimeout(() => {
+                    setEvaluation("");
+                    shakeTimeoutRef.current = null;
+                }, 3000);
+            }, 0);
         }
     }
 
@@ -123,7 +97,8 @@ function HiraganaWords() {
                         {currentWordArray.map((char, index) =>
                                 <KanaBox
                                     char={char}
-                                    key={index}
+                                    key={`${trigger}`-`${index}`}
+                                    status={isCorrect ? undefined : evaluation}
                                 />
                             )
                         }
@@ -131,9 +106,8 @@ function HiraganaWords() {
                 </div>
             </div>
 
-
             <RomajiKeyboard
-                sendData={setKanaInput}
+                sendData={setUserInput}
                 onEnter={handleSubmit}
                 resetSignal={trigger}
                 isCorrect={isCorrect}
