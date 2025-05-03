@@ -116,14 +116,14 @@ section h3,
     font-size: 1.05rem;
     color: var(--kgBlue);
     margin: 0;
-    transform: translateY(8px);
+    transform: translateY(16px);
 }
 
 .info-list .text p {
     font-size: 0.95rem;
     color: var(--kgGray);
     margin: 0;
-    transform: translateY(-8px);
+    transform: translateY(2px);
 }
 
 .tech-stack .icons {
