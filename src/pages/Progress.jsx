@@ -27,8 +27,8 @@ function Progress() {
 
     return (
         <div className="progress-container">
-            <h1 className="title">Progress</h1>
-            <p className="subtitle">Coming Soon! Stay tuned.</p>
+            <h1 className="title">W.I.P. Progress Page</h1>
+            <p className="subtitle">Coming soon! Stay tuned.</p>
 
             <div className="preview-blur">
                 <div className="progress-kana-split-row">
