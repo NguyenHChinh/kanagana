@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FloatingKana from './FloatingKana';
+import exampleProblem from '../assets/example.png';
+
 import '../styles/Homepage.css';
 
 function Homepage() {
@@ -37,6 +39,14 @@ function Homepage() {
                     </div>
                 </div>
             </section>
+    
+            <h3>Example Katakana Problem</h3>
+            <div className="example-image">
+                <img
+                    src={exampleProblem}
+                    onClick={() => navigate("/practice/katakana")}
+                    alt="Example Katakana problem" />
+            </div>
 
             <FloatingKana/>
         </div>
