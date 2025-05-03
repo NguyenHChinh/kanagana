@@ -1,13 +1,21 @@
 @import './variables.css';
 
+.hiragana-page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    margin: auto;
+}
+
 .word-container{
-    /* background-color: green; */
     height: 5em;
-    padding-top: 0;
-    padding-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 
 .characters-container{
@@ -25,7 +33,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* padding-bottom: 10px; */
 }
 
 p{

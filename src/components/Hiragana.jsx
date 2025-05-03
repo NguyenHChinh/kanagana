@@ -66,25 +66,27 @@ function Hiragana() {
 
     return(
         <>
-            <div className="characters-container">
-                <div className="prompt">
-                    <p>Type the reading for..</p>
-                    <div className="word-container">
-                        <KanaBox
-                            char={currentHiragana}
-                            key={`${trigger}`}
-                            status={isCorrect ? undefined : evaluation}
-                        />
+            <div className="hiragana-page-container">
+                <div className="characters-container">
+                    <div className="prompt">
+                        <p>Type the reading for..</p>
+                        <div className="word-container">
+                            <KanaBox
+                                char={currentHiragana}
+                                key={`${trigger}`}
+                                status={isCorrect ? undefined : evaluation}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <Keyboard
-                sendData={setUserInput}
-                onEnter={handleSubmit}
-                resetSignal={trigger}
-                isCorrect={isCorrect}
-            />
+                <Keyboard
+                    sendData={setUserInput}
+                    onEnter={handleSubmit}
+                    resetSignal={trigger}
+                    isCorrect={isCorrect}
+                />
+            </div>
         </>
     )
 }
