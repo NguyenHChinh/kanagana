@@ -27,9 +27,10 @@
 .kana-select-container{
     display: flex;
     justify-content: center;
-    height: 25vh;
+    height: auto;
     gap: 2rem;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
 }
 
 .kana-card{
