@@ -1,6 +1,6 @@
 @import './variables.css';
 
-.hiragana-page-container{
+.singlecharacter-page-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,8 +11,6 @@
 
 .word-container{
     height: 5em;
-    padding-top: 10px;
-    padding-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,4 +38,5 @@ p{
     text-align: center;
     color: var(--kgGray);
     padding-top: 20px;
+    padding-bottom: 20px;
 }

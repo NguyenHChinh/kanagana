@@ -65,7 +65,7 @@ function Katakana() {
     }
 
     return(
-        <>
+        <div className="singlecharacter-page-container">            
             <div className="characters-container">
                 <div className="prompt">
                     <p>Type the reading for..</p>
@@ -85,7 +85,8 @@ function Katakana() {
                 resetSignal={trigger}
                 isCorrect={isCorrect}
             />
-        </>
+        </div>
+
     )
 }
 

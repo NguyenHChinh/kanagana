@@ -66,7 +66,7 @@ function Hiragana() {
 
     return(
         <>
-            <div className="hiragana-page-container">
+            <div className="singlecharacter-page-container">
                 <div className="characters-container">
                     <div className="prompt">
                         <p>Type the reading for..</p>
