@@ -1,9 +1,9 @@
 // Keyboard.jsx
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import "../styles/Keyboard.css";
 
-function Keyboard({ sendData, onEnter, resetSignal, isCorrect, forcedInput }) {
+const Keyboard = forwardRef(({ sendData, onEnter, resetSignal, isCorrect, forcedInput }, ref) => {
     const [input, setInput] = useState("");
     const [isFocused, setIsFocused] = useState(false);
 
@@ -49,6 +49,11 @@ function Keyboard({ sendData, onEnter, resetSignal, isCorrect, forcedInput }) {
         }
     }
 
+    useImperativeHandle(ref, () => ({
+        focusInput,
+    }));
+
+
     return(
         <div
             className={`keyboard-container ${isCorrect ? "correct" : ""} ${isFocused ? "focused" : ""}`}
@@ -68,7 +73,7 @@ function Keyboard({ sendData, onEnter, resetSignal, isCorrect, forcedInput }) {
                 spellCheck="false"
             />
         </div>
-    )
-}
+    );
+});
 
 export default Keyboard;

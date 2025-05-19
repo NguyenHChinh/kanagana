@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, use } from "react";
 import hiraganaCharacters from '../data/hiraganaCharacters.json';
 import KanaBox from './KanaBox';
 import Keyboard from './Keyboard';
@@ -17,7 +17,8 @@ function Hiragana() {
     const [forcedInput, setForcedInput] = useState("");
 
     const shakeTimeoutRef = useRef(null);
-    
+    const keyboardRef = useRef(null);
+
     function handleSubmit() {
         if (isCorrect) {
             let newKana = getRandomHiragana();
@@ -82,6 +83,7 @@ function Hiragana() {
                 </div>
 
                 <Keyboard
+                    ref={keyboardRef}
                     sendData={setUserInput}
                     onEnter={handleSubmit}
                     resetSignal={trigger}
