@@ -40,3 +40,14 @@ p{
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.give-up-button{
+    background-color: var(--kgRed);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 2rem;
+}

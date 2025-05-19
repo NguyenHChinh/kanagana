@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/Keyboard.css";
 
-function Keyboard({ sendData, onEnter, resetSignal, isCorrect }) {
+function Keyboard({ sendData, onEnter, resetSignal, isCorrect, forcedInput }) {
     const [input, setInput] = useState("");
     const [isFocused, setIsFocused] = useState(false);
 
@@ -17,6 +17,12 @@ function Keyboard({ sendData, onEnter, resetSignal, isCorrect }) {
             inputRef.current.value = "";
         }
     }, [resetSignal]);
+
+    useEffect(() => {
+        if (forcedInput !== undefined && forcedInput !== null) {
+            setInput(forcedInput);
+        }
+    }, [forcedInput]);
 
     function handleKeyDown(e) {
         if (e.key === "Backspace") {

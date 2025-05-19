@@ -14,6 +14,7 @@ function Hiragana() {
     const [isCorrect, setIsCorrect] = useState(false);
     const [evaluation, setEvaluation] = useState("");
     const [trigger, setTrigger] = useState(0);
+    const [forcedInput, setForcedInput] = useState("");
 
     const shakeTimeoutRef = useRef(null);
     
@@ -85,7 +86,21 @@ function Hiragana() {
                     onEnter={handleSubmit}
                     resetSignal={trigger}
                     isCorrect={isCorrect}
+                    forcedInput={forcedInput}
                 />
+
+                <button
+                    className='give-up-button'
+                    onClick={() => {
+                        const correct = hiraganaCharacters[currentHiragana][0];
+                        setUserInput(correct);       // keep for evaluation purposes
+                        setForcedInput(correct);     // actually shown to user
+                        setIsCorrect(true);
+                    }}
+                >
+                    Reveal Answer
+                </button>
+
             </div>
         </>
     )
