@@ -98,6 +98,7 @@ function Hiragana() {
                         setUserInput(correct);       // keep for evaluation purposes
                         setForcedInput(correct);     // actually shown to user
                         setIsCorrect(true);
+                        keyboardRef.current?.focusInput();
                     }}
                 >
                     Reveal Answer
