@@ -15,11 +15,10 @@
 
 ## 🌐 Deployment
 
-Kanagana's deployment is not live yet, but once it's available, a link to the live application will be provided here.
+Kanagana is now live at the following link:
+https://chinhnguyen.dev/kanagana/
 
-The goal is to make the tool easily accessible through a browser, with no installation or login required.
-
-Stay tuned!
+Good luck with the studies! 頑張って！
 
 ## 🛠️ Local Development
 
